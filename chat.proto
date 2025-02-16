@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package chat;
+
+
+message ChatMessage {
+    int32 client_id = 1;
+    string message = 2;
+}
+
+message Empty {}
+
+message ClientRequest {
+    int32 client_id = 1;
+}
+
+message MessageList {
+    repeated ChatMessage messages = 1;
+}
+
+// Defining the gRPC service for chat communication
+service ChatService {
+    rpc SendMessage(ChatMessage) returns (Empty);
+    rpc GetMessages(ClientRequest) returns (MessageList);
+}
